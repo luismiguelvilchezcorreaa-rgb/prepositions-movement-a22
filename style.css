@@ -2,3 +2,68 @@
 :root{font-family:Inter,system-ui,Segoe UI,sans-serif;color:#eef7ff;background:#07131f}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 10%,#173c5d 0,transparent 28%),linear-gradient(160deg,#06111b,#0b2235 55%,#071722);min-height:100vh}
 button,select{font:inherit}.wrap{max-width:1100px;margin:auto;padding:28px 18px 50px}.hero{display:flex;justify-content:space-between;gap:18px;align-items:end;flex-wrap:wrap}.kicker{font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#7dd3fc;font-size:.78rem}h1{font-size:clamp(2rem,6vw,4.4rem);margin:.25rem 0;line-height:.98}.sub{max-width:720px;color:#b6cada}.score{display:flex;gap:10px}.stat{background:#102a40;border:1px solid #244865;border-radius:18px;padding:12px 15px;min-width:110px}.stat span{display:block;color:#8da9bf;font-size:.75rem;text-transform:uppercase}.stat strong{font-size:1.35rem}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}.tab{border:1px solid #315a78;background:#10273a;color:#dceffd;padding:10px 14px;border-radius:999px;font-weight:800}.tab.active{background:#e1f5ff;color:#08233a}.panel{background:#0d2031;border:1px solid #244a68;border-radius:24px;padding:24px}.hidden{display:none}.head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.head h2{margin:0}.head p{margin:6px 0 0;color:#9eb6ca}.badge{background:#123f50;color:#a7efe9;padding:7px 10px;border-radius:999px;font-size:.8rem;font-weight:800}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#10283c;border:1px solid #2e506a;border-radius:18px;padding:16px}.visual{height:120px;display:grid;place-items:center;background:#091927;border-radius:14px;margin-bottom:12px;position:relative;font-size:44px;font-weight:900;color:#dff6ff}.cube{width:58px;height:58px;border-radius:10px;background:linear-gradient(145deg,#ffb62f,#f28b17);box-shadow:inset -10px -9px 0 rgba(0,0,0,.08)}.visual .sym{position:absolute}.opts{display:grid;gap:8px;margin-top:12px}.opt{border:1px solid #355d78;background:#0d2132;color:#eff8ff;border-radius:12px;padding:10px;text-align:left}.opt.correct{background:#123f36;border-color:#45d4a8}.opt.wrong{background:#48212e;border-color:#fb7185}.feedback{min-height:22px;margin-top:8px;color:#b9d4e6;font-weight:700}.sentences{display:grid;gap:12px}.sentence{background:#10283c;border:1px solid #2d526e;border-radius:14px;padding:13px;display:flex;gap:10px;align-items:center}.sentence select{margin-left:auto;min-width:180px;background:#091927;color:#eef7ff;border:1px solid #3b6685;border-radius:10px;padding:9px}.match{display:grid;grid-template-columns:1fr 1fr;gap:14px}.col{display:grid;gap:9px}.match-btn{border:1px solid #31536a;background:#10273a;color:#eef7ff;padding:12px;border-radius:12px;text-align:left}.match-btn.selected{outline:2px solid #7dd3fc}.match-btn.matched{background:#153c34;border-color:#3cc9a0;opacity:.7}.builder{display:grid;gap:14px}.answer{min-height:58px;border:1px dashed #4a718c;border-radius:14px;padding:10px;display:flex;gap:8px;flex-wrap:wrap}.tokens{display:flex;gap:8px;flex-wrap:wrap}.token{border:1px solid #3d6380;background:#10293e;color:#eef7ff;border-radius:11px;padding:9px 11px}.token.used{opacity:.35}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.primary,.secondary{border:0;border-radius:12px;padding:10px 15px;font-weight:800}.primary{background:#dff6ff;color:#08233a}.secondary{background:#17344b;color:#eef7ff;border:1px solid #345d7c}.result{margin-top:14px;padding:13px 15px;border:1px solid #2b526e;border-radius:14px;background:#0a1d2d}.footer{text-align:center;color:#8ca9c0;margin-top:18px;font-size:.9rem}@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid,.match{grid-template-columns:1fr}.sentence{flex-direction:column;align-items:stretch}.sentence select{margin-left:0;width:100%}}
+
+
+/* --- Animated movement laboratory visuals --- */
+.visual{isolation:isolate}
+.visual .cube{position:relative;z-index:2}
+.visual .motion-dot{
+  position:absolute;width:18px;height:18px;border-radius:50%;
+  background:#dff6ff;box-shadow:0 0 20px rgba(125,211,252,.75);
+  z-index:3;
+}
+.visual .trail{
+  position:absolute;border:2px dashed rgba(125,211,252,.65);
+  z-index:1;pointer-events:none;
+}
+.visual .label-mini{
+  position:absolute;bottom:8px;right:10px;
+  color:#8ec8e9;font-size:.72rem;font-weight:800;letter-spacing:.06em;
+}
+.visual.up .trail,.visual.down .trail{height:78px;width:0;left:50%;top:21px}
+.visual.towards .trail,.visual.through .trail,.visual.past .trail{width:110px;height:0;left:18px;top:50%}
+.visual.fromto .trail{width:130px;height:0;left:12px;top:50%}
+.visual.into .trail,.visual.outof .trail{width:78px;height:58px;border-radius:50%;border-left-color:transparent;border-bottom-color:transparent;transform:rotate(25deg)}
+.visual.around .trail{width:116px;height:72px;border-radius:50%;}
+
+.visual.up .motion-dot{animation:moveUp 1.8s ease-in-out infinite}
+.visual.down .motion-dot{animation:moveDown 1.8s ease-in-out infinite}
+.visual.towards .motion-dot{animation:moveTowards 2s ease-in-out infinite}
+.visual.around .motion-dot{animation:moveAround 2.4s linear infinite}
+.visual.through .motion-dot{animation:moveThrough 2s ease-in-out infinite}
+.visual.fromto .motion-dot{animation:moveFromTo 2.3s ease-in-out infinite}
+.visual.into .motion-dot{animation:moveInto 2s ease-in-out infinite}
+.visual.outof .motion-dot{animation:moveOutOf 2s ease-in-out infinite}
+.visual.past .motion-dot{animation:movePast 2.2s ease-in-out infinite}
+
+@keyframes moveUp{0%,15%{transform:translate(0,38px);opacity:.35}55%{opacity:1}85%,100%{transform:translate(0,-38px);opacity:.35}}
+@keyframes moveDown{0%,15%{transform:translate(0,-38px);opacity:.35}55%{opacity:1}85%,100%{transform:translate(0,38px);opacity:.35}}
+@keyframes moveTowards{0%,15%{transform:translate(-62px,28px);opacity:.3}75%,100%{transform:translate(-8px,4px);opacity:1}}
+@keyframes moveAround{
+  0%{transform:translate(52px,0)}
+  25%{transform:translate(0,34px)}
+  50%{transform:translate(-52px,0)}
+  75%{transform:translate(0,-34px)}
+  100%{transform:translate(52px,0)}
+}
+@keyframes moveThrough{0%,12%{transform:translate(-76px,0);opacity:.3}48%{opacity:1}88%,100%{transform:translate(76px,0);opacity:.3}}
+@keyframes moveFromTo{0%,12%{transform:translate(-72px,0);opacity:.35}88%,100%{transform:translate(72px,0);opacity:1}}
+@keyframes moveInto{0%,15%{transform:translate(-48px,-34px);opacity:.35}80%,100%{transform:translate(0,4px);opacity:1}}
+@keyframes moveOutOf{0%,15%{transform:translate(0,5px);opacity:1}85%,100%{transform:translate(50px,-40px);opacity:.3}}
+@keyframes movePast{0%,10%{transform:translate(-78px,28px);opacity:.3}90%,100%{transform:translate(82px,-25px);opacity:.3}}
+
+.card{transition:transform .22s ease,border-color .22s ease,background .22s ease}
+.card:hover{transform:translateY(-4px);border-color:#4e7da0}
+.tab{transition:transform .18s ease,background .18s ease}
+.tab:hover{transform:translateY(-2px)}
+.panel{animation:panelIn .32s ease both}
+@keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.opt,.match-btn,.token,.primary,.secondary{transition:transform .15s ease,filter .15s ease,border-color .15s ease}
+.opt:hover,.match-btn:hover,.token:hover,.primary:hover,.secondary:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.correct{animation:correctPulse .45s ease}
+.wrong{animation:wrongShake .35s ease}
+@keyframes correctPulse{50%{transform:scale(1.03)}}
+@keyframes wrongShake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}

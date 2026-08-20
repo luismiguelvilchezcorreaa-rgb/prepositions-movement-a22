@@ -1,13 +1,13 @@
-# Prepositions of Movement A2
+# Prepositions of Movement A2 — Animated Version
 
-Simple GitHub Pages version.
+Simple GitHub Pages version with animated movement demonstrations.
 
-## Upload
-Upload these three files to the root of a GitHub repository:
+Upload these files to the repository root:
 - index.html
 - app.js
 - style.css
+- README.md
 
-Then go to **Settings → Pages → Deploy from a branch → main → / (root) → Save**.
+Then use **Settings → Pages → Deploy from a branch → main → / (root)**.
 
-No npm, no TypeScript build, no GitHub Actions required.
+No npm, no build, no GitHub Actions.
